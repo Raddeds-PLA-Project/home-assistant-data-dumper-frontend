@@ -1,15 +1,11 @@
 import Drawer from "@mui/material/Drawer"
-import Button from "@mui/material/Button"
-import * as React from 'react';
+import type { OpenCloseProps } from "../type/OpenClose";
 
-export default function HamburgerMenu() {
-
-    const [open, setOpen] = React.useState(true);
+export default function HamburgerMenu({ open, onClose }: OpenCloseProps) {
 
     return (
         <>
-            <Button onClick={()=>{setOpen(true)}}>Open Drawer</Button>
-            <Drawer open={open} onClose={()=>{setOpen(false)}}>
+            <Drawer open={open} onClose={onClose}>
                 <p>This is a navigation drawer!</p>
             </Drawer>
         </>

@@ -5,8 +5,11 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
+import * as React from "react";
 
 export default function Titlebar() {
+    const [menuOpen, setMenuOpen] = React.useState(false);
+
     return (
         <>
             <AppBar position="static">
@@ -17,6 +20,7 @@ export default function Titlebar() {
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2 }}
+                        onClick={() => setMenuOpen(true)}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -26,6 +30,7 @@ export default function Titlebar() {
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
+            <HamburgerMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
         </>
     )
 }
