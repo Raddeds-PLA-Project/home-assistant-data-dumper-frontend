@@ -1,41 +1,35 @@
-import React from "react";
 import {
     BrowserRouter as Router,
     Routes,
-    Route
+    Route,
+    useLocation
 } from "react-router-dom";
-import HamburgerMenu from "./components/HamburgerMenu";
-import Titlebar from "./components/Titlebar";
+import Navigation from "./components/Navigation";
+import DataView from "./pages/DataView"
+import Status from "./pages/Status"
 
-function Status() {
+function AppContent() {
+    const currentPagePath = useLocation().pathname;
+    const pageName =
+        currentPagePath === "/" ? "Status"
+        : currentPagePath === "/view" ? "Data View" : "";
+
     return (
         <>
-            <p>This is the status page.</p>
-        </>
-    )
-}
-
-function DataView() {
-    return (
-        <>
-            <p className="font-bold">This is the Data View page.</p>
+            <Navigation pageName={pageName} />
+            <Routes>
+                <Route path="/" element={<Status />} />
+                <Route path="/view" element={<DataView />} />
+            </Routes>
         </>
     )
 }
 
 function App() {
-
     return (
-        <>
-            <HamburgerMenu />
-            <Titlebar />
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Status />} />
-                    <Route path="/view" element={<DataView />} />
-                </Routes>
-            </Router>
-        </>
+        <Router>
+            <AppContent />
+        </Router>
     )
 }
 
