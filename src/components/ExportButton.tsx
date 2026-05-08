@@ -12,7 +12,7 @@ export default function ExportButton() {
                 aria-label="export"
                 sx={{
                     position: "fixed",
-                    bottom: 16,
+                    bottom: 38,
                     right: 16,
                     zIndex: 1300
                 }}
