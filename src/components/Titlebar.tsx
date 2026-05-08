@@ -24,7 +24,7 @@ export default function Titlebar({setOpen, pageName}: OpenCloserProps & NavEleme
             </IconButton>
             <Breadcrumbs sx={{ color: "inherit" }}>
                 <Typography variant="h6" color="inherit">
-                    Radded's Home Assistant Data Dumper
+                    Data Dumper
                 </Typography>
                 <Typography variant="h6" color="inherit">
                     {pageName}
