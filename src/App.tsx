@@ -15,6 +15,7 @@ import Container from "@mui/material/Container";
 import Titlebar from "./components/Titlebar";
 import HamburgerMenu from "./components/HamburgerMenu";
 import Footer from "./components/Footer";
+import FourOhFour from "./pages/404"
 import { useIsMobile } from "./hooks/isMobile";
 
 function AppContent() {
@@ -43,6 +44,7 @@ function AppContent() {
                             <Route path="/" element={<Status />} />
                             <Route path="/view" element={<DataView />} />
                             <Route path="/about" element={<About/>}/>
+                            <Route path="*" element={<FourOhFour/>}/>
                         </Routes>
                     </Container>
                     <Footer/>
