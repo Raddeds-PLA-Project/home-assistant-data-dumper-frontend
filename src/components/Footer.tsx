@@ -11,7 +11,10 @@ export default function Footer() {
                     Coded with occasional vibes by Radded.
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "1rem"}}>
-                    Version: 0.426_alpha_webui_update
+                    Backend Version: 0.4321_alpha_webui_merge
+                </Typography>
+                <Typography variant="caption" sx={{marginLeft: "0.5rem"}}>
+                    Frontend Version: 0.2_alpha_version_numbering
                 </Typography>
             </Box>
         </>
