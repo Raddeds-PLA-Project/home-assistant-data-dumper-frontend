@@ -11,7 +11,7 @@ export default function Footer() {
                     Coded with occasional vibes by Radded.
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "1rem"}}>
-                    Backend Version: 0.4321_alpha_webui_merge
+                    Backend Version: 0.44_alpha
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "0.5rem"}}>
                     Frontend Version: 0.3_alpha_collapsible_desktop_sidebar
