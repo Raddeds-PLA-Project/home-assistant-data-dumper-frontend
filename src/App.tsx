@@ -4,6 +4,7 @@ import {
     Routes,
     Route,
     useLocation,
+    Navigate
 } from "react-router-dom";
 import {
     Box
@@ -21,7 +22,7 @@ import { useIsMobile } from "./hooks/isMobile";
 function AppContent() {
     const currentPagePath = useLocation().pathname;
     const pageName =
-        currentPagePath === "/" ? "Status"
+        currentPagePath === "/index.html" ? "Status"
         : currentPagePath === "/view" ? "Data View"
         : currentPagePath === "/about" ? "About"
         : "";
@@ -41,7 +42,8 @@ function AppContent() {
                     <Titlebar pageName={pageName} setOpen={setMenuOpenMobile} open={menuOpenMobile} />
                     <Container className="mt-4 mb-16 grow">
                         <Routes>
-                            <Route path="/" element={<Status />} />
+                            <Route path="/" element={<Navigate to="/index.html" replace/>}/>
+                            <Route path="/index.html" element={<Status />} />
                             <Route path="/view" element={<DataView />} />
                             <Route path="/about" element={<About/>}/>
                             <Route path="*" element={<FourOhFour/>}/>

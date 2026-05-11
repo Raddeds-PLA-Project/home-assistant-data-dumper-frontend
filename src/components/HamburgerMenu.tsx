@@ -39,7 +39,7 @@ export default function HamburgerMenu({ open, onClose, pageName, isMobile }: Ope
                     </ListItem>
                 </ListItemButton>
                 <Collapse in={dumpOpen}>
-                    <ListItemButton selected={pageName == "Status"} onClick={()=>{navigate("/")}}>
+                    <ListItemButton selected={pageName == "Status"} onClick={()=>{navigate("/index.html")}}>
                         <ListItem key="Status">
                             <ListItemIcon >
                                 <HistoryIcon/>
