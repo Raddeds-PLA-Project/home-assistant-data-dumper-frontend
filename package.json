@@ -1,7 +1,7 @@
 {
   "name": "home-assistant-data-dumper-frontend",
   "private": true,
-  "version": "0.2_alpha_version_numbering",
+  "version": "0.3_alpha_collapsible_desktop_sidebar",
   "type": "module",
   "scripts": {
     "dev": "vite",

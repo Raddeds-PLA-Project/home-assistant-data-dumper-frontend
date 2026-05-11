@@ -9,7 +9,7 @@ import {
 import type { NavElementProps } from "../type/NavElementProps";
 import type { OpenCloserProps } from "../type/OpenCloserProps";
 
-export default function Titlebar({setOpen, pageName}: OpenCloserProps & NavElementProps) {
+export default function Titlebar({open, setOpen, pageName}: OpenCloserProps & NavElementProps) {
     return <AppBar position="static">
         <Toolbar>
             <IconButton
@@ -18,7 +18,7 @@ export default function Titlebar({setOpen, pageName}: OpenCloserProps & NavEleme
                 color="inherit"
                 aria-label="menu"
                 sx={{ mr: 2 }}
-                onClick={() => setOpen(true)}
+                onClick={() => setOpen(!open)}
             >
                 <MenuIcon />
             </IconButton>

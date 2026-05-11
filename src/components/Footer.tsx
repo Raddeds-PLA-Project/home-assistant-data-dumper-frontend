@@ -14,7 +14,7 @@ export default function Footer() {
                     Backend Version: 0.4321_alpha_webui_merge
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "0.5rem"}}>
-                    Frontend Version: 0.2_alpha_version_numbering
+                    Frontend Version: 0.3_alpha_collapsible_desktop_sidebar
                 </Typography>
             </Box>
         </>

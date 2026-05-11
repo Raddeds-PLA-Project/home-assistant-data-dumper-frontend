@@ -26,20 +26,25 @@ function AppContent() {
         : currentPagePath === "/view" ? "Data View"
         : currentPagePath === "/about" ? "About"
         : "";
-    const [menuOpenMobile, setMenuOpenMobile] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const isMobile = useIsMobile();
     // TODO: Dynamic page names relative to the actual list of pages
     // - This will need to be carried through into Navigation (HamburgerMenu and Titlebar)
     // - Not every single page needs the Export Button!
+    // TODO: I think there's a more MUI friendly way to handle the collapsible sidebar but this works for now
 
     return (
         <>
             <Box sx={{display:"flex"}}>
-                <Box component="nav" sx={{width: isMobile ? 0 : 250, flexShrink:{sm:0}}}>
-                    <HamburgerMenu isMobile={isMobile} pageName={pageName} open={menuOpenMobile} onClose={() => setMenuOpenMobile(false)} />
+                <Box component="nav" sx={{width: isMobile || !menuOpen ? 0 : 250, flexShrink:{sm:0}}}>
+                    {menuOpen || isMobile
+                        ? <HamburgerMenu isMobile={isMobile} pageName={pageName} open={menuOpen} onClose={() => setMenuOpen(false)} />
+                        : <></>
+                    }
+                    
                 </Box>
-                <Box component="main" className="grow flex flex-col" sx={{ width: { sm: isMobile ? "100%" :`calc(100% - 250 px)`}, minHeight: "100vh"}}>
-                    <Titlebar pageName={pageName} setOpen={setMenuOpenMobile} open={menuOpenMobile} />
+                <Box component="main" className="grow flex flex-col" sx={{ minHeight: "100vh" }}>
+                    <Titlebar pageName={pageName} setOpen={setMenuOpen} open={menuOpen} />
                     <Container className="mt-4 mb-16 grow">
                         <Routes>
                             <Route path="/" element={<Navigate to="/index.html" replace/>}/>
