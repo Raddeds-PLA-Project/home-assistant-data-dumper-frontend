@@ -1,7 +1,7 @@
 # Frontend for Radded's Home Assistant Data Dumper
 
 ## Description
-A React frontend for [Radded's Home Assistant Data Dumper](https://github.com/RaddedMC/home-assistant-data-dumper)
+A React frontend for [Radded's Home Assistant Data Dumper](https://github.com/RaddedMC/home-assistant-data-dumper).
 
 ## Installation (for development only!)
 
