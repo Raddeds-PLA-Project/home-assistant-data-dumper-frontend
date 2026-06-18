@@ -120,31 +120,34 @@ export default function Status(props: MobileProps) {
 
     // -- Obtain data from addon API -- //
     useEffect(() => {
-        setLoading(true);
-        Promise.all([
-            // Fetch schedule
-            fetch("/api/worker/schedule")
-                .then((response) => response.json())
-                .then((data: SchedulerAPIResponse) => {
-                    console.log(data);
-                    setSchedule(data);
-                })
-                .catch((err) => {
-                    console.error(err.message);
-                }),
-            // Fetch worker
-            fetch("/api/worker/tasks")
-                .then((response) => response.json())
-                .then((data: WorkerAPIResponse) => {
-                    console.log(data);
-                    setWorker(data);
-                })
-                .catch((err) => {
-                    console.error(err.message);
-                })
-        ])  
-        // Unset loading when schedule and worker data ready
-            .then(() => {setLoading(false)});
+        const interval = setInterval(() => {
+            Promise.all([
+                // Fetch schedule
+                fetch("/api/worker/schedule")
+                    .then((response) => response.json())
+                    .then((data: SchedulerAPIResponse) => {
+                        console.log(data);
+                        setSchedule(data);
+                    })
+                    .catch((err) => {
+                        console.error(err.message);
+                    }),
+                // Fetch worker
+                fetch("/api/worker/tasks")
+                    .then((response) => response.json())
+                    .then((data: WorkerAPIResponse) => {
+                        console.log(data);
+                        setWorker(data);
+                    })
+                    .catch((err) => {
+                        console.error(err.message);
+                    })
+            ])  
+            // Unset loading when schedule and worker data ready
+                .then(() => {setLoading(false)});
+        }, 1000); // Repeat every second
+
+        return () => clearInterval(interval);
     }, []);
 
     // Page content
