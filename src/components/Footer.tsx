@@ -6,12 +6,13 @@ import {
 export default function Footer() {
     return (
         <>
-            <Box className=" bg-slate-300 text-center"> // TODO: The version numbers get a little long on mobile
+            <Box className=" bg-slate-300 text-center"> {/* TODO: The version numbers get a little long on mobile */}
+                {/* PLEASE Make the backend version auto-update somehow */}
                 <Typography variant="caption">
                     Coded with occasional vibes by Radded.
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "1rem"}}>
-                    Backend Version: 0.522_alpha_full_schedule_test
+                    Backend Version: 0.53_alpha_api_fix
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "0.5rem"}}>
                     Frontend Version: 0.6_alpha_return_xport
