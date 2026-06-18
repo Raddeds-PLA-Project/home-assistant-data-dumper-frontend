@@ -6,8 +6,8 @@ import {
     Typography,
     Breadcrumbs
 } from "@mui/material";
-import type { NavElementProps } from "../type/NavElementProps";
-import type { OpenCloserProps } from "../type/OpenCloserProps";
+import type { NavElementProps } from "../type/appTypes/NavElementProps";
+import type { OpenCloserProps } from "../type/appTypes/OpenCloserProps";
 
 export default function Titlebar({open, setOpen, pageName}: OpenCloserProps & NavElementProps) {
     return <AppBar position="static">
