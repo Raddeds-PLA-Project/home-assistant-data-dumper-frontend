@@ -11,10 +11,10 @@ export default function Footer() {
                     Coded with occasional vibes by Radded.
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "1rem"}}>
-                    Backend Version: 0.466_alpha_prep_dumping
+                    Backend Version: 0.522_alpha_full_schedule_test
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "0.5rem"}}>
-                    Frontend Version: 0.5_alpha_status
+                    Frontend Version: 0.6_alpha_return_xport
                 </Typography>
             </Box>
         </>

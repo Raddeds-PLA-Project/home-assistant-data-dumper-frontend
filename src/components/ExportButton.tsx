@@ -6,7 +6,8 @@ import DownloadIcon from '@mui/icons-material/Download';
 export default function ExportButton() {
     return (
         <>
-            <Fab
+            <a href="/api/export/sqlite">
+                <Fab
                 variant="extended"
                 color="primary"
                 aria-label="export"
@@ -17,9 +18,10 @@ export default function ExportButton() {
                     zIndex: 1300
                 }}
             >
-                <DownloadIcon sx={{mr:1}}/>
-                Export data
-            </Fab>
+                    <DownloadIcon sx={{mr:1}}/>
+                    Export data
+                </Fab>
+            </a>
         </>
     )
 }
