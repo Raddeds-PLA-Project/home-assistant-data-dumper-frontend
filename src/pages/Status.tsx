@@ -73,6 +73,7 @@ export default function Status(props: MobileProps) {
             : "white"
         }
     />;
+    // TODO: This could be a TaskListItem, I just need to parametrize the background
     const buildSystemStatus = (status: WorkerStatus) => <ListItem className=" bg-slate-200 rounded-2xl mt-2">
         <ListItemAvatar sx={{
             color:
@@ -146,6 +147,7 @@ export default function Status(props: MobileProps) {
             ])  
             // Unset loading when schedule and worker data ready
                 .then(() => {setLoading(false)});
+                // TODO: a websocket could be used instead of this refreshing
         }, 1000); // Repeat every second
 
         return () => clearInterval(interval);
@@ -159,7 +161,7 @@ export default function Status(props: MobileProps) {
         ? <>
             <Skeleton animation="wave" className="w-full p-8 rounded-2xl"/>
             {/* Mobile UI splitter*/}
-            <div className={props.isMobile ? "" : "flex flex-row"}> // TODO: Same as below with tablet view
+            <div className={props.isMobile ? "" : "flex flex-row"}> {/* TODO: Same as below with tablet view */}
                 {/* Task queue */}
                 <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4"/>
 
@@ -169,6 +171,7 @@ export default function Status(props: MobileProps) {
         </> :
         scheduleElements == null || workerElements == null || systemStatus == null ?
         // Error if the page fails to load
+        // TODO: Error does not appear if the data fails to load during a refresh
         <>
             <div className="flex h-full w-full items-center justify-center">
                 <div className=" flex bg-slate-200 rounded-2xl p-4">
@@ -183,7 +186,9 @@ export default function Status(props: MobileProps) {
             {systemStatus}
 
             {/* Mobile UI splitter*/}
-            <div className={props.isMobile ? "" : "flex flex-row"}> // TODO: The tablet view can get a little squishy when the sidebar is open
+            {/* TODO: Scroll on overflow (tablet only) */}
+            {/* TODO: The tablet view can get a little squishy when the sidebar is open */}
+            <div className={props.isMobile ? "" : "flex flex-row"}>
                 {/* Task queue */}
                 <div className="bg-slate-200 rounded-2xl w-full mt-2 p-4">
                     <Typography variant="h5">Task Queue</Typography>

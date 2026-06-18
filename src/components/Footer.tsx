@@ -26,7 +26,8 @@ export default function Footer() {
 
     return (
         <>
-            <Box className=" bg-slate-300 text-center"> // TODO: The version numbers get a little long on mobile
+            <Box className=" bg-slate-300 text-center"> {/* TODO: The version numbers get a little long on mobile */}
+                {/* PLEASE Make the backend version auto-update somehow */}
                 <Typography variant="caption">
                     Coded with occasional vibes by Radded.
                 </Typography>
