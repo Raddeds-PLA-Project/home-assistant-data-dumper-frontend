@@ -121,6 +121,7 @@ export default function Status(props: MobileProps) {
     // -- Obtain data from addon API -- //
     useEffect(() => {
         const interval = setInterval(() => {
+            setLoading(true);
             Promise.all([
                 // Fetch schedule
                 fetch("/api/worker/schedule")
