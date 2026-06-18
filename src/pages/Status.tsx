@@ -27,17 +27,18 @@ import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import type { MobileProps } from "../type/appTypes/MobileProps";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { JSX } from "react";
 
 export default function Status(props: MobileProps) {
     // -- States -- //
     // Data
-    const [schedule, setSchedule] = useState<SchedulerAPIResponse | null>(null);
-    const [worker, setWorker] = useState<WorkerAPIResponse | null>(null);
+    const [schedule, setSchedule] = useState<SchedulerAPIResponse | undefined>(undefined);
+    const [worker, setWorker] = useState<WorkerAPIResponse | undefined>(undefined);
     // Elements
-    const [scheduleElements, setScheduleElements] = useState<ReactNode[] | null>(null);
-    const [workerElements, setWorkerElements] = useState<ReactNode[] | null>(null);
-    const [systemStatus, setSystemStatus] = useState<ReactNode | null>(null);
+    const [scheduleElements, setScheduleElements] = useState<JSX.Element[] | undefined>(undefined);
+    const [workerElements, setWorkerElements] = useState<JSX.Element[] | undefined>(undefined);
+    const [systemStatus, setSystemStatus] = useState<JSX.Element | undefined>(undefined);
     // Page state
     const [isLoading, setLoading] = useState(true);
 
@@ -56,7 +57,7 @@ export default function Status(props: MobileProps) {
             : <></>
         }
         textPrimary={entry.type + " : " + entry.title}
-        textSecondary={entry.status == "TaskState.FAILED" ? entry.error : entry.description}
+        textSecondary={entry.status == "TaskState.FAILED" ? (entry.error ? entry.error : "") : entry.description}
         avatarMainColor={
             entry.status == "TaskState.COMPLETED" ? "#00aa00" :
             entry.status == "TaskState.FAILED" ? "#aa0000" :
@@ -130,7 +131,14 @@ export default function Status(props: MobileProps) {
                 .catch((err) => {
                     console.error(err.message);
                 })
-        ]).then(() => {setLoading(false)});
+        ])  
+        // Build elements and unset loading when schedule and worker data ready
+            .then(() => {
+                setScheduleElements(schedule?.schedule.map(buildScheduleEntry));
+                setWorkerElements(worker?.tasks.map(buildWorkerEntry));
+                if (worker?.status) setSystemStatus(buildSystemStatus(worker?.status));
+            })      
+            .then(() => {setLoading(false)});
     }, []);
 
     // Page content

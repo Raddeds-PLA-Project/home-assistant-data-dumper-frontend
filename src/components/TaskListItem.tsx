@@ -1,4 +1,4 @@
-import type ListItemProps from "../type/appTypes/ListItemProps";
+import { type ListItemProps } from "../type/appTypes/ListItemProps";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";

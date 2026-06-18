@@ -10,7 +10,7 @@ export type WorkerTask = {
     title: string,
     status: WorkerTaskStatus,
     description: string,
-    error: string | null
+    error: string | undefined
 };
 
 export type WorkerStatus = "WorkerState.RUNNING" | "WorkerState.IDLE" | "WorkerState.NOT_STARTED" | "WorkerState.SHUT_DOWN";
