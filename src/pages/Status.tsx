@@ -108,8 +108,19 @@ export default function Status(props: MobileProps) {
         } />
     </ListItem>;
 
+    // -- Function to update page content on change of state -- //
+    useEffect(() => {
+        if (!isLoading) {
+            console.log("Data loaded!");
+        }
+        setScheduleElements(schedule?.schedule.map(buildScheduleEntry));
+        setWorkerElements(worker?.tasks.map(buildWorkerEntry));
+        if (worker?.status) setSystemStatus(buildSystemStatus(worker?.status));
+    }, [isLoading])
+
     // -- Obtain data from addon API -- //
     useEffect(() => {
+        setLoading(true);
         Promise.all([
             // Fetch schedule
             fetch("/api/worker/schedule")
@@ -132,12 +143,7 @@ export default function Status(props: MobileProps) {
                     console.error(err.message);
                 })
         ])  
-        // Build elements and unset loading when schedule and worker data ready
-            .then(() => {
-                setScheduleElements(schedule?.schedule.map(buildScheduleEntry));
-                setWorkerElements(worker?.tasks.map(buildWorkerEntry));
-                if (worker?.status) setSystemStatus(buildSystemStatus(worker?.status));
-            })      
+        // Unset loading when schedule and worker data ready
             .then(() => {setLoading(false)});
     }, []);
 
