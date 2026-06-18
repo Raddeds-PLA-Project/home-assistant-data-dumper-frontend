@@ -6,7 +6,7 @@ import {
 export default function Footer() {
     return (
         <>
-            <Box className=" bg-slate-300 text-center">
+            <Box className=" bg-slate-300 text-center"> // TODO: The version numbers get a little long on mobile
                 <Typography variant="caption">
                     Coded with occasional vibes by Radded.
                 </Typography>

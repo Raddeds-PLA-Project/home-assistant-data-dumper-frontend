@@ -121,7 +121,7 @@ export default function Status(props: MobileProps) {
     // -- Obtain data from addon API -- //
     useEffect(() => {
         const interval = setInterval(() => {
-            setLoading(true);
+            setLoading(true); // TODO: Changing loading to True/False causes flickering, but not using it prevents the page from updating
             Promise.all([
                 // Fetch schedule
                 fetch("/api/worker/schedule")
@@ -159,7 +159,7 @@ export default function Status(props: MobileProps) {
         ? <>
             <Skeleton animation="wave" className="w-full p-8 rounded-2xl"/>
             {/* Mobile UI splitter*/}
-            <div className={props.isMobile ? "" : "flex flex-row"}>
+            <div className={props.isMobile ? "" : "flex flex-row"}> // TODO: Same as below with tablet view
                 {/* Task queue */}
                 <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4"/>
 
@@ -183,7 +183,7 @@ export default function Status(props: MobileProps) {
             {systemStatus}
 
             {/* Mobile UI splitter*/}
-            <div className={props.isMobile ? "" : "flex flex-row"}>
+            <div className={props.isMobile ? "" : "flex flex-row"}> // TODO: The tablet view can get a little squishy when the sidebar is open
                 {/* Task queue */}
                 <div className="bg-slate-200 rounded-2xl w-full mt-2 p-4">
                     <Typography variant="h5">Task Queue</Typography>
