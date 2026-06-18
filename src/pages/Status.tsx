@@ -8,6 +8,7 @@ import { type SchedulerAPIResponse, type WorkerAPIResponse, type SchedulerEntry,
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
+import {Skeleton } from "@mui/material";
 
 /* Icons needed:
  * - Running : LoopIcon
@@ -25,60 +26,22 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import type { MobileProps } from "../type/appTypes/MobileProps";
+import { ReactNode, useEffect, useState } from "react";
 
-export default function Status() {
-    // Obtain data from addon API
-    const sampleSchedule : SchedulerAPIResponse = {
-        schedule: [
-            {
-                task: {
-                    type: "TestTask",
-                    title: "A test",
-                    status: "TaskState.RUNNING",
-                    description: "This is a test of the task scheduler",
-                    error: null
-                },
-                queue_time: "2026-06-17T22:55:20.473100",
-                daily: false
-            }
-        ]
-    };
+export default function Status(props: MobileProps) {
+    // -- States -- //
+    // Data
+    const [schedule, setSchedule] = useState<SchedulerAPIResponse | null>(null);
+    const [worker, setWorker] = useState<WorkerAPIResponse | null>(null);
+    // Elements
+    const [scheduleElements, setScheduleElements] = useState<ReactNode[] | null>(null);
+    const [workerElements, setWorkerElements] = useState<ReactNode[] | null>(null);
+    const [systemStatus, setSystemStatus] = useState<ReactNode | null>(null);
+    // Page state
+    const [isLoading, setLoading] = useState(true);
 
-    const sampleWorker : WorkerAPIResponse = {
-        status: "WorkerState.NOT_STARTED",
-        tasks: [
-            {
-                type: "CompletedTask",
-                title: "A job well done",
-                status: "TaskState.COMPLETED",
-                description: "A successful task that was completed",
-                error: null
-            },
-            {
-                type: "FailingTask",
-                title: "A horrible failure",
-                status: "TaskState.FAILED",
-                description: "This task will always fail",
-                error: "These are the details of the horrible failure"
-            },
-            {
-                type: "TestTask",
-                title: "A test",
-                status: "TaskState.RUNNING",
-                description: "This is a test of the task queue",
-                error: null
-            },
-            {
-                type: "TestTask",
-                title: "A test",
-                status: "TaskState.NOT_STARTED",
-                description: "A task that hasn't yet been ran",
-                error: null
-            },
-        ]
-    }
-
-    // Function to build elements for entries
+    // -- Function to build elements for entries -- //
     const buildScheduleEntry = (entry: SchedulerEntry) => <TaskListItem
         avatar={<CalendarMonthIcon/>}
         textPrimary={entry.task.type + " : " + entry.task.title}
@@ -115,13 +78,13 @@ export default function Status() {
                 status == "WorkerState.IDLE" ? "black" :
                 status == "WorkerState.NOT_STARTED" ? "#aaaaaa" :
                 status == "WorkerState.RUNNING" ? "#00aa00" :
-                status == "WorkerState.SHUT_DOWN" ? "#aa0000" : <></>
+                status == "WorkerState.SHUT_DOWN" ? "#aa0000" : ""
             ,
             background:
                 status == "WorkerState.IDLE" ? "#bbbbbb" :
                 status == "WorkerState.NOT_STARTED" ? "#dddddd" :
                 status == "WorkerState.RUNNING" ? "#aaffaa" :
-                status == "WorkerState.SHUT_DOWN" ? "#ffaaaa" : <></>
+                status == "WorkerState.SHUT_DOWN" ? "#ffaaaa" : ""
         }} className="rounded-full text-center pl-0 pr-0 pt-3 pb-3 mr-4">
             {
                 status == "WorkerState.IDLE" ? <ModeStandbyIcon/> :
@@ -144,31 +107,80 @@ export default function Status() {
         } />
     </ListItem>;
 
-    // Build elements for entries
-    const scheduleElements = sampleSchedule.schedule.map(buildScheduleEntry);
-    const workerElements = sampleWorker.tasks.map(buildWorkerEntry);
-    const systemStatus = buildSystemStatus(sampleWorker.status);
+    // -- Obtain data from addon API -- //
+    useEffect(() => {
+        Promise.all([
+            // Fetch schedule
+            fetch("/api/worker/schedule")
+                .then((response) => response.json())
+                .then((data: SchedulerAPIResponse) => {
+                    console.log(data);
+                    setSchedule(data);
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                }),
+            // Fetch worker
+            fetch("/api/worker/tasks")
+                .then((response) => response.json())
+                .then((data: WorkerAPIResponse) => {
+                    console.log(data);
+                    setWorker(data);
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                })
+        ]).then(() => {setLoading(false)});
+    }, []);
 
     // Page content
     return (
+        
+        isLoading
+        // Loader if page is still loading
+        ? <>
+            <Skeleton animation="wave" className="w-full p-8 rounded-2xl"/>
+            {/* Mobile UI splitter*/}
+            <div className={props.isMobile ? "" : "flex flex-row"}>
+                {/* Task queue */}
+                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4"/>
+
+                {/* Schedule */}
+                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}/>
+            </div>
+        </> :
+        scheduleElements == null || workerElements == null || systemStatus == null ?
+        // Error if the page fails to load
         <>
+            <div className="flex h-full w-full items-center justify-center">
+                <div className=" flex bg-slate-200 rounded-2xl p-4">
+                    <ReportProblemIcon className="mr-4"/>
+                    <Typography>There was an error loading system status. Check console.</Typography>
+                </div>
+            </div>
+        </>
+        // Actual page
+        : <>
             {/* System status */}
             {systemStatus}
 
-            {/* Task queue */}
-            <div className="bg-slate-200 rounded-2xl w-full mt-2 p-4">
-                <Typography variant="h5">Task Queue</Typography>
-                <List>
-                    {workerElements}
-                </List>
-            </div>
+            {/* Mobile UI splitter*/}
+            <div className={props.isMobile ? "" : "flex flex-row"}>
+                {/* Task queue */}
+                <div className="bg-slate-200 rounded-2xl w-full mt-2 p-4">
+                    <Typography variant="h5">Task Queue</Typography>
+                    <List>
+                        {workerElements}
+                    </List>
+                </div>
 
-            {/* Schedule */}
-            <div className="bg-slate-200 rounded-2xl w-full mt-2 p-4">
-                <Typography variant="h5">Schedule</Typography>
-                <List>
-                    {scheduleElements}
-                </List>
+                {/* Schedule */}
+                <div className="bg-slate-200 rounded-2xl w-full mt-2 p-4" style={{marginLeft: (props.isMobile ? "0" : "1rem")}}>
+                    <Typography variant="h5">Schedule</Typography>
+                    <List>
+                        {scheduleElements}
+                    </List>
+                </div>
             </div>
             <ExportButton/>
         </>

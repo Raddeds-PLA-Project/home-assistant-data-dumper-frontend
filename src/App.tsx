@@ -48,7 +48,7 @@ function AppContent() {
                     <Container className="mt-4 mb-16 grow">
                         <Routes>
                             <Route path="/" element={<Navigate to="/index.html" replace/>}/>
-                            <Route path="/index.html" element={<Status />} />
+                            <Route path="/index.html" element={<Status isMobile={isMobile}/>} />
                             <Route path="/view" element={<DataView />} />
                             <Route path="/about" element={<About/>}/>
                             <Route path="*" element={<FourOhFour/>}/>
