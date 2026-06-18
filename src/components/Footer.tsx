@@ -14,7 +14,7 @@ export default function Footer() {
                     Backend Version: 0.466_alpha_prep_dumping
                 </Typography>
                 <Typography variant="caption" sx={{marginLeft: "0.5rem"}}>
-                    Frontend Version: 0.3_alpha_collapsible_desktop_sidebar
+                    Frontend Version: 0.5_alpha_status
                 </Typography>
             </Box>
         </>
