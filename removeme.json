@@ -1,0 +1,69 @@
+[
+    {
+        "name": "Home Assistant",
+        "message": "started",
+        "icon": "mdi:home-assistant",
+        "domain": "homeassistant",
+        "when": "2026-05-11T19:13:19.584655+00:00"
+    },
+    {
+        "state": "above_horizon",
+        "entity_id": "sun.sun",
+        "name": "Sun",
+        "when": "2026-05-11T19:13:43.234588+00:00"
+    },
+    {
+        "state": "2026-05-12T03:07:31+00:00",
+        "entity_id": "sensor.sun_next_dawn",
+        "name": "Sun Next dawn",
+        "when": "2026-05-11T19:13:43.234861+00:00"
+    },
+    {
+        "state": "2026-05-11T20:05:32+00:00",
+        "entity_id": "sensor.sun_next_dusk",
+        "name": "Sun Next dusk",
+        "when": "2026-05-11T19:13:43.234977+00:00"
+    },
+    {
+        "state": "2026-05-11T23:36:49+00:00",
+        "entity_id": "sensor.sun_next_midnight",
+        "name": "Sun Next midnight",
+        "when": "2026-05-11T19:13:43.235080+00:00"
+    },
+    {
+        "state": "2026-05-12T11:36:49+00:00",
+        "entity_id": "sensor.sun_next_noon",
+        "name": "Sun Next noon",
+        "when": "2026-05-11T19:13:43.235182+00:00"
+    },
+    {
+        "state": "2026-05-12T03:50:14+00:00",
+        "entity_id": "sensor.sun_next_rising",
+        "name": "Sun Next rising",
+        "when": "2026-05-11T19:13:43.235291+00:00"
+    },
+    {
+        "state": "2026-05-11T19:22:48+00:00",
+        "entity_id": "sensor.sun_next_setting",
+        "name": "Sun Next setting",
+        "when": "2026-05-11T19:13:43.235398+00:00"
+    },
+    {
+        "state": "2026-05-12T19:24:24+00:00",
+        "entity_id": "sensor.sun_next_setting",
+        "name": "Sun Next setting",
+        "when": "2026-05-11T19:22:48.058800+00:00"
+    },
+    {
+        "state": "below_horizon",
+        "entity_id": "sun.sun",
+        "name": "Sun",
+        "when": "2026-05-11T19:26:48.063281+00:00"
+    },
+    {
+        "state": "2026-05-12T20:07:25+00:00",
+        "entity_id": "sensor.sun_next_dusk",
+        "name": "Sun Next dusk",
+        "when": "2026-05-11T20:05:32.481288+00:00"
+    }
+]
