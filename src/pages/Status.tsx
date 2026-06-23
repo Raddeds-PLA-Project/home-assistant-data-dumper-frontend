@@ -78,7 +78,7 @@ export default function Status(props: MobileProps) {
     // TODO: This could be a TaskListItem, I just need to parametrize the background of the whole TaskListItem
     const buildSystemStatus = (status: WorkerStatus, dbInfoLocal: DBInfoAPIResponse) => <>
         {/* TaskWorker Status */}
-        <ListItem className=" bg-slate-200 rounded-2xl mt-2">
+        <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginRight: (props.isMobile ? "0" : "0.5rem")}}>
             <ListItemAvatar sx={{
                 color:
                     status == "WorkerState.IDLE" ? "black" :
@@ -113,14 +113,14 @@ export default function Status(props: MobileProps) {
             } />
         </ListItem>
         {/* Database entry count */}
-        <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}>
+        <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginLeft: (props.isMobile ? "0" : "0.5rem")}}>
             <ListItemAvatar sx={{color: "#aaaaaa", background: "#dddddd"}} className="rounded-full text-center pl-0 pr-0 pt-3 pb-3 mr-4" >
                 <PendingIcon/>
             </ListItemAvatar>
             <ListItemText primary={dbInfoLocal.entry_count} secondary="Logbook entries dumped"/>
         </ListItem>
         {/* Newest entry time */}
-        <ListItem className=" bg-slate-200 rounded-2xl mt-2">
+        <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginRight: (props.isMobile ? "0" : "0.5rem")}}>
             <ListItemAvatar sx={{color: "#aaaaaa", background: "#dddddd"}} className="rounded-full text-center pl-0 pr-0 pt-3 pb-3 mr-4" >
                 <PendingIcon/>
             </ListItemAvatar>
@@ -128,7 +128,7 @@ export default function Status(props: MobileProps) {
             <ListItemText primary={dbInfoLocal.newest_entry_time} secondary="Newest logbook entry"/> 
         </ListItem>
         {/* Database lock indicator */}
-        <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}>
+        <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginLeft: (props.isMobile ? "0" : "0.5rem")}}>
             <ListItemAvatar sx={{
                     color:
                         dbInfoLocal.is_unlocked ? "#00aa00" : "#aa0000"
@@ -210,16 +210,16 @@ export default function Status(props: MobileProps) {
             {/* System Status */}
             <div className={props.isMobile ? "" : "grid grid-cols-2 grid-rows-2"}> {/* TODO: Same as below with tablet view */}
                 {/* TaskWorker Status */}
-                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4"/>
+                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginRight: (props.isMobile ? "0" : "0.5rem")}}/>
 
                 {/* DB Entry Count */}
-                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}/>
+                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginLeft: (props.isMobile ? "0" : "0.5rem")}}/>
 
                 {/* DB Newest Entry Time */}
-                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4"/>
+                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginRight: (props.isMobile ? "0" : "0.5rem")}}/>
 
                 {/* DB Lock status */}
-                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}/>
+                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginLeft: (props.isMobile ? "0" : "0.5rem")}}/>
             </div>
             {/* Mobile UI splitter*/}
             <div className={props.isMobile ? "" : "flex flex-row"}> {/* TODO: Same as below with tablet view */}
