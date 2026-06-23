@@ -113,28 +113,29 @@ export default function Status(props: MobileProps) {
             } />
         </ListItem>
         {/* Database entry count */}
-        <ListItem className=" bg-slate-200 rounded-2xl mt-2">
-            <ListItemAvatar sx={{color: "#aaaaaa", background: "#dddddd"}} >
+        <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}>
+            <ListItemAvatar sx={{color: "#aaaaaa", background: "#dddddd"}} className="rounded-full text-center pl-0 pr-0 pt-3 pb-3 mr-4" >
                 <PendingIcon/>
             </ListItemAvatar>
             <ListItemText primary={dbInfoLocal.entry_count} secondary="Logbook entries dumped"/>
         </ListItem>
         {/* Newest entry time */}
         <ListItem className=" bg-slate-200 rounded-2xl mt-2">
-            <ListItemAvatar sx={{color: "#aaaaaa", background: "#dddddd"}} >
+            <ListItemAvatar sx={{color: "#aaaaaa", background: "#dddddd"}} className="rounded-full text-center pl-0 pr-0 pt-3 pb-3 mr-4" >
                 <PendingIcon/>
             </ListItemAvatar>
-            <ListItemText primary={dbInfoLocal.newest_entry_time} secondary="Newest logbook entry"/>
+            {/* TODO: Convert ISO time into a more readable time format here */}
+            <ListItemText primary={dbInfoLocal.newest_entry_time} secondary="Newest logbook entry"/> 
         </ListItem>
         {/* Database lock indicator */}
-        <ListItem className=" bg-slate-200 rounded-2xl mt-2">
+        <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}>
             <ListItemAvatar sx={{
                     color:
                         dbInfoLocal.is_unlocked ? "#00aa00" : "#aa0000"
                     ,
                     background:
                         dbInfoLocal.is_unlocked ? "#aaffaa" : "#ffaaaa"
-                }} >
+                }} className="rounded-full text-center pl-0 pr-0 pt-3 pb-3 mr-4" >
                 {dbInfoLocal.is_unlocked ? <CheckCircleIcon/> : <ReportProblemIcon/>}
             </ListItemAvatar>
             <ListItemText primary={
@@ -215,7 +216,7 @@ export default function Status(props: MobileProps) {
                 <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}/>
 
                 {/* DB Newest Entry Time */}
-                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}/>
+                <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4"/>
 
                 {/* DB Lock status */}
                 <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginLeft: (props.isMobile ? "0" : "1rem")}}/>
