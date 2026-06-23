@@ -77,6 +77,7 @@ export default function Status(props: MobileProps) {
     />;
     // TODO: This could be a TaskListItem, I just need to parametrize the background of the whole TaskListItem
     const buildSystemStatus = (status: WorkerStatus, dbInfoLocal: DBInfoAPIResponse) => <>
+        {/* TODO: Margins here need some work */}
         {/* TaskWorker Status */}
         <ListItem className=" bg-slate-200 rounded-2xl mt-2" sx={{marginRight: (props.isMobile ? "0" : "0.5rem")}}>
             <ListItemAvatar sx={{
@@ -208,6 +209,7 @@ export default function Status(props: MobileProps) {
         // Loader if page is still loading
         ? <>
             {/* System Status */}
+            {/* TODO: Margins here need some work */}
             <div className={props.isMobile ? "" : "grid grid-cols-2 grid-rows-2"}> {/* TODO: Same as below with tablet view */}
                 {/* TaskWorker Status */}
                 <Skeleton animation="wave" className="rounded-2xl w-full mt-2 p-4" sx={{marginRight: (props.isMobile ? "0" : "0.5rem")}}/>
